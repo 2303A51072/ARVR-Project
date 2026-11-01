@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f2">
+  <title>Pathfinder AR | Campus Navigator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Pathfinder AR home"><span class="brand-mark">↗</span><span>pathfinder<span class="brand-ar"> AR</span></span></a>
+    <div class="topbar-right"><span class="live-dot"></span><span>Campus demo</span><span class="avatar">S</span></div>
+  </header>
+  <main class="layout">
+    <section class="intro"><p class="eyebrow">YOUR CAMPUS, MADE SIMPLE</p><h1>Find your way<br><span>with confidence.</span></h1><p class="intro-copy">Choose a destination and follow a clear route across campus. Switch to camera mode for an augmented reality style guide.</p></section>
+    <section class="navigator" aria-label="Campus navigation">
+      <div class="controls">
+        <div class="section-head"><div><p class="eyebrow">PLAN A ROUTE</p><h2>Where are you going?</h2></div><span class="map-pin">⌖</span></div>
+        <label for="start">Starting point</label><select id="start"></select>
+        <label for="destination">Destination</label><div class="search-wrap"><span>⌕</span><input id="destination" list="places" placeholder="Search buildings or rooms"><datalist id="places"></datalist></div>
+        <div class="quick-row"><span>Popular</span><button class="chip" data-place="Library">Library</button><button class="chip" data-place="Science Lab">Science Lab</button><button class="chip" data-place="Cafeteria">Cafeteria</button></div>
+        <button class="primary" id="routeBtn">Find my route <span>→</span></button>
+        <div id="routeDetails" class="route-details hidden" aria-live="polite"></div>
+        <div class="mode-row"><div><strong>Camera guide</strong><small>See directions over your surroundings</small></div><button id="cameraBtn" class="camera-toggle" aria-pressed="false"><span></span></button></div>
+        <p class="camera-note">Camera mode works on HTTPS or localhost. On a laptop, allow camera access or use the map demo.</p>
+      </div>
+      <div class="map-panel">
+        <div class="map-toolbar"><div><span class="live-dot"></span><strong>Greenfield Campus</strong><small> · Interactive map</small></div><button id="resetBtn" class="icon-button" aria-label="Reset map">⟳</button></div>
+        <div class="map" id="map" role="img" aria-label="Interactive map of Greenfield Campus">
+          <div class="map-grid"></div><svg class="roads" viewBox="0 0 760 480" preserveAspectRatio="none" aria-hidden="true"><path d="M-30 335 C135 315 165 210 285 230 S460 310 570 230 680 115 790 135"/><path d="M110 -20 C125 95 175 155 285 230 S420 370 440 510"/><path d="M-20 120 C115 135 195 115 275 120 S475 160 780 65"/><path d="M610 0 C565 105 595 170 570 230 S540 370 610 500"/></svg>
+          <div class="green green-one"></div><div class="green green-two"></div><div class="green green-three"></div><div class="green green-four"></div>
+          <div class="building" data-node="main" style="--x:39%;--y:47%;--w:20%;--h:22%"><span>MAIN<br>BLOCK</span></div>
+          <div class="building" data-node="library" style="--x:14%;--y:22%;--w:17%;--h:15%"><span>LIBRARY</span></div>
+          <div class="building" data-node="science" style="--x:65%;--y:17%;--w:19%;--h:18%"><span>SCIENCE<br>LAB</span></div>
+          <div class="building" data-node="cafeteria" style="--x:68%;--y:65%;--w:18%;--h:15%"><span>CAFETERIA</span></div>
+          <div class="building" data-node="sports" style="--x:15%;--y:66%;--w:21%;--h:17%"><span>SPORTS<br>COMPLEX</span></div>
+          <div class="building" data-node="auditorium" style="--x:43%;--y:10%;--w:15%;--h:13%"><span>AUDITORIUM</span></div>
+          <div class="map-label label-one">NORTH GATE</div><div class="map-label label-two">CENTRAL LAWN</div><div class="map-label label-three">EAST WALK</div>
+          <svg id="routeSvg" class="route-svg" viewBox="0 0 760 480" preserveAspectRatio="none" aria-hidden="true"><path id="routePath" d=""/><circle id="startDot" r="8"/><circle id="endDot" r="9"/></svg>
+          <div id="mapToast" class="map-toast hidden"></div><div class="compass">N<br><span>↑</span></div>
+        </div>
+        <div class="map-footer"><span><i class="legend-dot start-legend"></i> You are here</span><span><i class="legend-line"></i> Suggested route</span><span class="scale">Map is for demonstration</span></div>
+      </div>
+    </section>
+    <section class="steps-card hidden" id="stepsCard"><div class="steps-title"><div><p class="eyebrow">YOUR ROUTE</p><h2 id="routeHeading">Directions</h2></div><span class="distance-pill" id="distancePill"></span></div><div class="steps-list" id="stepsList"></div></section>
+    <footer>Built as a student prototype · Greenfield Campus is a fictional demo campus</footer>
+  </main>
+  <div id="cameraView" class="camera-view hidden"><video id="cameraVideo" autoplay playsinline muted></video><div class="camera-shade"></div><button id="closeCamera" class="close-camera">× <span>Close camera</span></button><div class="ar-badge"><span class="live-dot"></span> AR GUIDE</div><div class="ar-marker marker-a"><b>↑</b><span id="arDirection">Head straight</span></div><div class="ar-marker marker-b">⌖ <span id="arTarget">Destination</span><small id="arRemaining">Follow the route</small></div><div class="ar-bottom"><strong id="arTitle">Camera guide</strong><span id="arSub">Allow camera access to begin</span><div class="ar-progress"><i></i></div></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
